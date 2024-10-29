@@ -50,15 +50,17 @@ public class EvidenceChatekApp {
                     }
                 }
                 case ODEBRANI_NAVSTEVNIKU -> {
-
+                    if (odebraniNavstevniku()) break;
                 }
+                
 
                 case CELKOVA_OBSAZENOST -> {
-                    // TODO
+                    celkovaObsazenost();
                 }
+                
 
                 case VYPIS_PRAZDNE_CHATKY -> {
-                    // TODO
+                    prazdneChatky();
                 }
 
                 case KONEC_PROGRAMU -> {
@@ -70,6 +72,33 @@ public class EvidenceChatekApp {
                 }
             }
         } while (operace != 0);
+    }
+
+    private static void prazdneChatky() {
+        for (int i = 0; i < chatky.length; i++) {
+            if(chatky[i]==0){
+                System.out.format("Chatka[%d] je prázdná \n", i + 1);}
+        }
+    }
+
+    private static void celkovaObsazenost() {
+        int celkovyPocetUbytovanych = 0;
+        for (int i = 0; i < chatky.length; i++) {
+            celkovyPocetUbytovanych += chatky[i];
+        }
+        System.out.println("Celkový počet ubytovaných lidí: " + celkovyPocetUbytovanych);
+    }
+
+    private static boolean odebraniNavstevniku() {
+        zadejCisloChatky();
+        System.out.println("Zadejte počet lidí k odebrání: ");
+        int pocetLidi = scanner.nextInt();
+        if (pocetLidi <= 0) {
+            System.out.println("Nelze odebrat záporný počet lidí nebo 0!");
+            return true;
+        }
+        return false;
+        
     }
 
     private static void vypisChatek() {
